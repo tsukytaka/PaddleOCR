@@ -76,10 +76,10 @@ Metric:
 Train:
   dataset:
     name: SimpleDataSet
-    data_dir: ../TextRecognitionDataGenerator/trdg/out/
+    data_dir: ../gdrive/MyDrive/Colab Notebooks/PaddleOCR/SerialDataTrain/train_data/
     ext_op_transform_idx: 1
     label_file_list:
-    - ../TextRecognitionDataGenerator/trdg/train_labels.txt
+    - ../gdrive/MyDrive/Colab Notebooks/PaddleOCR/SerialDataTrain/train_labels.txt
     transforms:
     - DecodeImage:
         img_mode: BGR
@@ -107,9 +107,9 @@ Train:
 Eval:
   dataset:
     name: SimpleDataSet
-    data_dir: ../TextRecognitionDataGenerator/trdg/out/
+    data_dir: ../gdrive/MyDrive/Colab Notebooks/PaddleOCR/SerialDataTrain/val_data/
     label_file_list:
-    - ../TextRecognitionDataGenerator/trdg/val_labels.txt
+    - ../gdrive/MyDrive/Colab Notebooks/PaddleOCR/SerialDataTrain/val_labels.txt
     transforms:
     - DecodeImage:
         img_mode: BGR

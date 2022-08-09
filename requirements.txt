@@ -13,3 +13,5 @@ lxml
 premailer
 openpyxl
 attrdict
+
+#python tools/train.py -c configs/rec/PP-OCRv3/en_PP-OCRv3_rec.yml -o Global.pretrained_model=models/en_PP-OCRv3_rec_train/best_accuracy Global.use_gpu=false

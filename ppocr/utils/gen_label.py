@@ -15,6 +15,20 @@ import os
 import argparse
 import json
 
+def gen_rec_label_from_image_name(input_path, out_label):
+    tm_labels = []
+    with open(input_path, 'r') as f:
+        for line in f.readlines():
+            tm_labels.append(line.strip('\n'))
+
+    with open(out_label, 'w') as out_file:
+        for i in range(160):
+            for j in range(len(tm_labels)):
+                img_path, label = f"{j}_{tm_labels[j]}_{i}.jpg", tm_labels[j]
+                print(f"img_path = {img_path}")
+                out_file.write(img_path + '\t' + label + '\n')
+                j += 1
+
 
 def gen_rec_label(input_path, out_label):
     with open(out_label, 'w') as out_file:
@@ -76,6 +90,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.mode == "rec":
         print("Generate rec label")
-        gen_rec_label(args.input_path, args.output_label)
+        gen_rec_label_from_image_name("E:/Longnm/Projects/TextRecognitionDataGenerator/trdg/texts/random_serial.txt", "E:/Longnm/Projects/TextRecognitionDataGenerator/trdg/labels.txt")
+        # gen_rec_label(args.input_path, args.output_label)
     elif args.mode == "det":
         gen_det_label(args.root_path, args.input_path, args.output_label)

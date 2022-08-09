@@ -76,10 +76,10 @@ Metric:
 Train:
   dataset:
     name: SimpleDataSet
-    data_dir: ./train_data/
+    data_dir: ../TextRecognitionDataGenerator/trdg/out/
     ext_op_transform_idx: 1
     label_file_list:
-    - ./train_data/train_list.txt
+    - ../TextRecognitionDataGenerator/trdg/train_labels.txt
     transforms:
     - DecodeImage:
         img_mode: BGR
@@ -107,9 +107,9 @@ Train:
 Eval:
   dataset:
     name: SimpleDataSet
-    data_dir: ./train_data
+    data_dir: ../TextRecognitionDataGenerator/trdg/out/
     label_file_list:
-    - ./train_data/val_list.txt
+    - ../TextRecognitionDataGenerator/trdg/val_labels.txt
     transforms:
     - DecodeImage:
         img_mode: BGR

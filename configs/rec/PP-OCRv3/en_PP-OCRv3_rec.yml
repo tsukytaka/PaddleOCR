@@ -1,10 +1,10 @@
 Global:
   debug: false
   use_gpu: true
-  epoch_num: 500
+  epoch_num: 20
   log_smooth_window: 20
   print_batch_step: 10
-  save_model_dir: ../gdrive/MyDrive/Colab Notebooks/PaddleOCR/output/v3_en_mobile
+  save_model_dir: ../drive/MyDrive/Colab Notebooks/PaddleOCR/output/v3_en_mobile
   save_epoch_step: 3
   eval_batch_step: [0, 2000]
   cal_metric_during_train: true
@@ -18,7 +18,7 @@ Global:
   infer_mode: false
   use_space_char: true
   distributed: true
-  save_res_path: ../gdrive/MyDrive/Colab Notebooks/PaddleOCR/output/rec/predicts_ppocrv3_en.txt
+  save_res_path: ../drive/MyDrive/Colab Notebooks/PaddleOCR/output/rec/predicts_ppocrv3_en.txt
 
 
 Optimizer:
@@ -76,10 +76,10 @@ Metric:
 Train:
   dataset:
     name: SimpleDataSet
-    data_dir: ../gdrive/MyDrive/Colab Notebooks/PaddleOCR/SerialDataTrain/train_data/
+    data_dir: ../drive/MyDrive/Colab Notebooks/PaddleOCR/SerialDataTrain/train_data/
     ext_op_transform_idx: 1
     label_file_list:
-    - ../gdrive/MyDrive/Colab Notebooks/PaddleOCR/SerialDataTrain/train_labels.txt
+    - ../drive/MyDrive/Colab Notebooks/PaddleOCR/SerialDataTrain/train_labels.txt
     transforms:
     - DecodeImage:
         img_mode: BGR
@@ -107,9 +107,9 @@ Train:
 Eval:
   dataset:
     name: SimpleDataSet
-    data_dir: ../gdrive/MyDrive/Colab Notebooks/PaddleOCR/SerialDataTrain/val_data/
+    data_dir: ../drive/MyDrive/Colab Notebooks/PaddleOCR/SerialDataTrain/val_data/
     label_file_list:
-    - ../gdrive/MyDrive/Colab Notebooks/PaddleOCR/SerialDataTrain/val_labels.txt
+    - ../drive/MyDrive/Colab Notebooks/PaddleOCR/SerialDataTrain/val_labels.txt
     transforms:
     - DecodeImage:
         img_mode: BGR

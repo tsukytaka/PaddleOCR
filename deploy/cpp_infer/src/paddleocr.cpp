@@ -164,6 +164,74 @@ void PPOCR::reset_timer() {
   this->time_info_cls = {0, 0, 0};
 }
 
+int PPOCR::ocr(cv::Mat img, std::string &text, double &score, bool det, bool rec, bool cls)
+{
+	int ret = 0;
+	std::vector < std::vector<OCRPredictResult>> ocr_results;
+	std::vector<cv::Mat> img_list{ img };
+	if (!det) {
+		std::vector<OCRPredictResult> ocr_result{ OCRPredictResult() };
+		if (cls && this->classifier_ != nullptr) {
+			this->cls(img_list, ocr_result);
+			for (int i = 0; i < img_list.size(); i++) {
+				if (ocr_result[i].cls_label % 2 == 1 &&
+					ocr_result[i].cls_score > this->classifier_->cls_thresh) {
+					cv::rotate(img_list[i], img_list[i], 1);
+				}
+			}
+		}
+		if (rec) {
+			this->rec(img_list, ocr_result);
+		}
+		for (int i = 0; i < img_list.size(); ++i) {
+			std::vector<OCRPredictResult> ocr_result_tmp;
+			ocr_result_tmp.push_back(ocr_result[i]);
+			ocr_results.push_back(ocr_result_tmp);
+		}
+	}
+	else {
+		if (!Utility::PathExists(FLAGS_output) && FLAGS_det) {
+			Utility::CreateDir(FLAGS_output);
+		}
+
+		for (int i = 0; i < img_list.size(); ++i) {
+			std::vector<OCRPredictResult> ocr_result;
+
+			// det
+			this->det(img_list[i], ocr_result);
+			// crop image
+			std::vector<cv::Mat> crop_img_list;
+			for (int j = 0; j < ocr_result.size(); j++) {
+				cv::Mat crop_img;
+				crop_img_list = Utility::GetRotateCropImage(img_list[i], ocr_result[j].box);
+				crop_img_list.push_back(crop_img);
+			}
+
+			// cls
+			if (cls && this->classifier_ != nullptr) {
+				this->cls(crop_img_list, ocr_result);
+				for (int i = 0; i < crop_img_list.size(); i++) {
+					if (ocr_result[i].cls_label % 2 == 1 &&
+						ocr_result[i].cls_score > this->classifier_->cls_thresh) {
+						cv::rotate(crop_img_list[i], crop_img_list[i], 1);
+					}
+				}
+			}
+			// rec
+			if (rec) {
+				this->rec(crop_img_list, ocr_result);
+			}
+			ocr_results.push_back(ocr_result);
+		}
+	}
+	if (ocr_results[0].size() > 0) {
+		text = ocr_results[0][0].text;
+		score = ocr_results[0][0].score;
+	}
+	return ret;
+}
+
+
 void PPOCR::benchmark_log(int img_num) {
   if (this->time_info_det[0] + this->time_info_det[1] + this->time_info_det[2] >
       0) {

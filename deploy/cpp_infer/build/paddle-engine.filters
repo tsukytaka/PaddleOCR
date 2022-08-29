@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\args.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\clipper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\ocr_cls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\ocr_det.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\ocr_rec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\paddleocr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\postprocess_op.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\preprocess_op.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{38997BA3-19D3-3DEF-B3DE-6672177E2773}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

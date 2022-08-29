@@ -19,6 +19,7 @@
 
 #include <include/args.h>
 #include <include/paddleocr.h>
+#include <paddle_engine.h>
 
 using namespace PaddleOCR;
 
@@ -55,51 +56,75 @@ void check_params() {
 }
 
 int main(int argc, char **argv) {
-  // Parsing command-line
-  google::ParseCommandLineFlags(&argc, &argv, true);
-  check_params();
+	int ret = 0;
+	google::ParseCommandLineFlags(&argc, &argv, true);
+	//check_params();
+	//if (!Utility::PathExists(FLAGS_image_dir)) {
+	//	std::cerr << "[ERROR] image path not exist! image_dir: " << FLAGS_image_dir
+	//			  << endl;
+	//	exit(1);
+	//}
+	std::vector<cv::String> cv_all_img_names;
+	cv::glob(FLAGS_image_dir, cv_all_img_names);
+	std::cout << "total images num: " << cv_all_img_names.size() << endl;
 
-  if (!Utility::PathExists(FLAGS_image_dir)) {
-    std::cerr << "[ERROR] image path not exist! image_dir: " << FLAGS_image_dir
-              << endl;
-    exit(1);
-  }
+	cv::Mat img = cv::imread(cv_all_img_names[0], cv::IMREAD_COLOR);
 
-  std::vector<cv::String> cv_all_img_names;
-  cv::glob(FLAGS_image_dir, cv_all_img_names);
-  std::cout << "total images num: " << cv_all_img_names.size() << endl;
-
-  PPOCR ocr = PPOCR();
-
-  std::vector<std::vector<OCRPredictResult>> ocr_results =
-      ocr.ocr(cv_all_img_names, FLAGS_det, FLAGS_rec, FLAGS_cls);
-
-  for (int i = 0; i < cv_all_img_names.size(); ++i) {
-    if (FLAGS_benchmark) {
-      cout << cv_all_img_names[i] << '\t';
-      for (int n = 0; n < ocr_results[i].size(); n++) {
-        for (int m = 0; m < ocr_results[i][n].box.size(); m++) {
-          cout << ocr_results[i][n].box[m][0] << ' '
-               << ocr_results[i][n].box[m][1] << ' ';
-        }
-      }
-      cout << endl;
-    } else {
-      cout << cv_all_img_names[i] << "\n";
-      Utility::print_result(ocr_results[i]);
-      if (FLAGS_visualize && FLAGS_det) {
-        cv::Mat srcimg = cv::imread(cv_all_img_names[i], cv::IMREAD_COLOR);
-        if (!srcimg.data) {
-          std::cerr << "[ERROR] image read failed! image path: "
-                    << cv_all_img_names[i] << endl;
-          exit(1);
-        }
-        std::string file_name = Utility::basename(cv_all_img_names[i]);
-
-        Utility::VisualizeBboxes(srcimg, ocr_results[i],
-                                 FLAGS_output + "/" + file_name);
-      }
-      cout << "***************************" << endl;
-    }
-  }
+	PaddleEngine pe;
+	pe.initRecognizer(FLAGS_rec_model_dir);
+	std::string text;
+	double score;
+	ret = pe.readText(img, text, score, false, true, false);
+	std::cout << "text: " << text << " - " << score << endl;
+	return ret;
 }
+//
+//int main(int argc, char **argv) {
+//  // Parsing command-line
+//  google::ParseCommandLineFlags(&argc, &argv, true);
+//  check_params();
+//
+//  if (!Utility::PathExists(FLAGS_image_dir)) {
+//    std::cerr << "[ERROR] image path not exist! image_dir: " << FLAGS_image_dir
+//              << endl;
+//    exit(1);
+//  }
+//
+//  std::vector<cv::String> cv_all_img_names;
+//  cv::glob(FLAGS_image_dir, cv_all_img_names);
+//  std::cout << "total images num: " << cv_all_img_names.size() << endl;
+//
+//  PPOCR ocr = PPOCR();
+//
+//  std::vector<std::vector<OCRPredictResult>> ocr_results =
+//      ocr.ocr(cv_all_img_names, FLAGS_det, FLAGS_rec, FLAGS_cls);
+//
+//  for (int i = 0; i < cv_all_img_names.size(); ++i) {
+//    if (FLAGS_benchmark) {
+//      cout << cv_all_img_names[i] << '\t';
+//      for (int n = 0; n < ocr_results[i].size(); n++) {
+//        for (int m = 0; m < ocr_results[i][n].box.size(); m++) {
+//          cout << ocr_results[i][n].box[m][0] << ' '
+//               << ocr_results[i][n].box[m][1] << ' ';
+//        }
+//      }
+//      cout << endl;
+//    } else {
+//      cout << cv_all_img_names[i] << "\n";
+//      Utility::print_result(ocr_results[i]);
+//      if (FLAGS_visualize && FLAGS_det) {
+//        cv::Mat srcimg = cv::imread(cv_all_img_names[i], cv::IMREAD_COLOR);
+//        if (!srcimg.data) {
+//          std::cerr << "[ERROR] image read failed! image path: "
+//                    << cv_all_img_names[i] << endl;
+//          exit(1);
+//        }
+//        std::string file_name = Utility::basename(cv_all_img_names[i]);
+//
+//        Utility::VisualizeBboxes(srcimg, ocr_results[i],
+//                                 FLAGS_output + "/" + file_name);
+//      }
+//      cout << "***************************" << endl;
+//    }
+//  }
+//}

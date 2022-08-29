@@ -46,6 +46,8 @@ public:
   std::vector<std::vector<OCRPredictResult>>
   ocr(std::vector<cv::String> cv_all_img_names, bool det = true,
       bool rec = true, bool cls = true);
+  int ocr(cv::Mat img, std::string &text, double &score, bool det = true,
+	  bool rec = true, bool cls = true);
 
 private:
   DBDetector *detector_ = nullptr;

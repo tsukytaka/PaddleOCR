@@ -22,7 +22,7 @@ output/
 .clang-format
 .clang_format.hook
 
-build/
+
 dist/
 paddleocr.egg-info/
 /deploy/android_demo/app/OpenCV/

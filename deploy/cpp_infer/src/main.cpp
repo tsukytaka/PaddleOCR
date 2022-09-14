@@ -71,6 +71,7 @@ int main(int argc, char **argv) {
 	cv::Mat img = cv::imread(cv_all_img_names[0], cv::IMREAD_COLOR);
 
 	PaddleEngine pe;
+	pe.configRecognizer("--rec_char_dict_path=../../../../ppocr/utils/en_dict.txt");
 	pe.initRecognizer(FLAGS_rec_model_dir);
 	std::string text;
 	double score;

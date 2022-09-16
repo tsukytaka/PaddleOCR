@@ -22,9 +22,9 @@ def gen_rec_label_from_image_name(input_path, out_label):
             tm_labels.append(line.strip('\n'))
 
     with open(out_label, 'w') as out_file:
-        for i in range(160):
+        for i in range(1):
             for j in range(len(tm_labels)):
-                img_path, label = f"{j}_{tm_labels[j]}_{i}.jpg", tm_labels[j]
+                img_path, label = f"{j}_{tm_labels[j]}_{i}.png", " ".join(tm_labels[j])
                 print(f"img_path = {img_path}")
                 out_file.write(img_path + '\t' + label + '\n')
                 j += 1

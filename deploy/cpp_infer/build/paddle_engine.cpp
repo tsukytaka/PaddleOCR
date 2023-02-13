@@ -7,12 +7,12 @@
 #include <include/paddleocr.h>
 using namespace PaddleOCR;
 
-int PaddleEngine::initRecognizer(std::string model_path)
+int PaddleEngine::initRecognizer(std::string det_model_path, std::string rec_model_path, std::string cls_model_path)
 {
 	int ret = ERROR_SUCCESS;
-	FLAGS_rec_model_dir = model_path;
-	FLAGS_det = false;
-	FLAGS_cls = false;
+	FLAGS_det_model_dir = det_model_path;
+	FLAGS_rec_model_dir = rec_model_path;
+	FLAGS_cls_model_dir = cls_model_path;
 	recognizer = new PPOCR();
 	return ret;
 }

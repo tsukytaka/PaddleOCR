@@ -54,7 +54,7 @@ void check_params() {
     exit(1);
   }
 }
-
+//./ppocr.exe --rec_model_dir=paddle_rec_model/en --image_dir=images/ocrImg.png
 int main(int argc, char **argv) {
 	int ret = 0;
 	google::ParseCommandLineFlags(&argc, &argv, true);
@@ -71,11 +71,11 @@ int main(int argc, char **argv) {
 	cv::Mat img = cv::imread(cv_all_img_names[0], cv::IMREAD_COLOR);
 
 	PaddleEngine pe;
-	pe.configRecognizer("--rec_char_dict_path=../../../../ppocr/utils/en_dict.txt");
-	pe.initRecognizer(FLAGS_rec_model_dir);
+	pe.configRecognizer("--rec_char_dict_path=paddle_rec_model/en/en_dict.txt");
+	pe.initRecognizer("paddle_det_model/en",FLAGS_rec_model_dir, "");
 	std::string text;
 	double score;
-	ret = pe.readText(img, text, score, false, true, false);
+	ret = pe.readText(img, text, score, true, true, false);
 	std::cout << "text: " << text << " - " << score << endl;
 	return ret;
 }

@@ -13,7 +13,6 @@
 // limitations under the License.
 
 #pragma once
-
 #include <include/ocr_cls.h>
 #include <include/ocr_det.h>
 #include <include/ocr_rec.h>
@@ -32,6 +31,9 @@ public:
   std::vector<OCRPredictResult> ocr(cv::Mat img, bool det = true,
                                     bool rec = true, bool cls = true);
 
+  int ocr(cv::Mat img, std::string &text, double &score, bool det = true,
+	  bool rec = true, bool cls = true);
+
   void reset_timer();
   void benchmark_log(int img_num);
 
@@ -45,8 +47,6 @@ protected:
            std::vector<OCRPredictResult> &ocr_results);
   void cls(std::vector<cv::Mat> img_list,
            std::vector<OCRPredictResult> &ocr_results);
-  int ocr(cv::Mat img, std::string &text, double &score, bool det = true,
-	  bool rec = true, bool cls = true);
 
 private:
   DBDetector *detector_ = nullptr;

@@ -203,7 +203,7 @@ int PPOCR::ocr(cv::Mat img, std::string &text, double &score, bool det, bool rec
 			std::vector<cv::Mat> crop_img_list;
 			for (int j = 0; j < ocr_result.size(); j++) {
 				cv::Mat crop_img;
-				crop_img_list = Utility::GetRotateCropImage(img_list[i], ocr_result[j].box);
+				crop_img = Utility::GetRotateCropImage(img_list[i], ocr_result[j].box);
 				crop_img_list.push_back(crop_img);
 			}
 
@@ -225,8 +225,12 @@ int PPOCR::ocr(cv::Mat img, std::string &text, double &score, bool det, bool rec
 		}
 	}
 	if (ocr_results[0].size() > 0) {
-		text = ocr_results[0][0].text;
-		score = ocr_results[0][0].score;
+		for (int i = ocr_results[0].size() - 1; i >= 0; i--) {
+			text += ocr_results[0][i].text + " \n";
+			score += ocr_results[0][i].score;
+		}
+		score /= ocr_results[0].size();
+		
 	}
 	return ret;
 }

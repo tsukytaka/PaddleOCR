@@ -174,6 +174,7 @@ void structure(std::vector<cv::String> &cv_all_img_names) {
   }
 }
 
+//./ppocr.exe --rec_model_dir=paddle_rec_model/en --image_dir=images/ocrImg.png)
 int main(int argc, char **argv) {
 	int ret = 0;
 	google::ParseCommandLineFlags(&argc, &argv, true);
@@ -185,7 +186,7 @@ int main(int argc, char **argv) {
 	//}
 	std::vector<cv::String> cv_all_img_names;
 	cv::glob(FLAGS_image_dir, cv_all_img_names);
-	std::cout << "total images num: " << cv_all_img_names.size() << endl;
+	std::cout << "total images num: " << cv_all_img_names.size() << std::endl;
 
 
   //if (!Utility::PathExists(FLAGS_image_dir)) {
@@ -211,12 +212,12 @@ int main(int argc, char **argv) {
 	cv::Mat img = cv::imread(cv_all_img_names[0], cv::IMREAD_COLOR);
 
 	PaddleEngine pe;
-	pe.configRecognizer("--rec_char_dict_path=../../../../ppocr/utils/en_dict.txt");
-	pe.initRecognizer(FLAGS_rec_model_dir);
+	pe.configRecognizer("--rec_char_dict_path=paddle_rec_model/en/en_dict.txt");
+	pe.initRecognizer("paddle_det_model/en",FLAGS_rec_model_dir, "");
 	std::string text;
 	double score;
-	ret = pe.readText(img, text, score, false, true, false);
-	std::cout << "text: " << text << " - " << score << endl;
+	ret = pe.readText(img, text, score, true, true, false);
+	std::cout << "text: " << text << " - " << score << std::endl;
 	return ret;
 }
 //

@@ -14,7 +14,7 @@ private:
 	void* recognizer;
 
 public:
-	int initRecognizer(std::string model_path);
+	int initRecognizer(std::string det_model_path, std::string rec_model_path, std::string cls_model_path);
 	int configRecognizer(std::string opt);
 	int readText(cv::Mat img, std::string &text, double &score, bool det, bool rec, bool cls);
 };

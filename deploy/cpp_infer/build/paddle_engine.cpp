@@ -33,10 +33,16 @@ int PaddleEngine::configRecognizer(std::string opt)
 int PaddleEngine::readText(cv::Mat img, std::string &text, double &score, bool det, bool rec, bool cls)
 {
 	int ret = ERROR_SUCCESS;
-	PPOCR* ppocr = static_cast<PPOCR*>(recognizer);
-	text = "";
-	score = -1;
-	ret = ppocr->ocr(img, text, score, det, rec, cls);
-
+	if (img.cols < 5 || img.rows < 5)
+	{
+		ret = ERROR_DATA_NOT_ACCEPTED;
+	}
+	if (ret == ERROR_SUCCESS)
+	{
+		PPOCR* ppocr = static_cast<PPOCR*>(recognizer);
+		text = "";
+		score = -1;
+		ret = ppocr->ocr(img, text, score, det, rec, cls);
+	}
 	return ret;
 }

@@ -167,6 +167,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\paddlestructure.cpp" />
+    <ClCompile Include="..\src\structure_layout.cpp" />
+    <ClCompile Include="..\src\structure_table.cpp" />
     <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\args.cpp" />
     <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\clipper.cpp" />
     <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\ocr_cls.cpp" />
@@ -188,6 +191,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.16.27023\include\ammintrin.h" />
+    <ClInclude Include="..\include\paddlestructure.h" />
+    <ClInclude Include="..\include\structure_layout.h" />
+    <ClInclude Include="..\include\structure_table.h" />
     <ClInclude Include="paddle_engine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

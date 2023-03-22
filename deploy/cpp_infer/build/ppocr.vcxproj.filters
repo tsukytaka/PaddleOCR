@@ -31,6 +31,15 @@
     <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\paddlestructure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\structure_layout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\structure_table.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\CMakeLists.txt" />

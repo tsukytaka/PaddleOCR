@@ -168,6 +168,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\paddlestructure.cpp" />
+    <ClCompile Include="..\src\structure_layout.cpp" />
+    <ClCompile Include="..\src\structure_table.cpp" />
     <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\args.cpp" />
     <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\clipper.cpp" />
     <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\main.cpp" />

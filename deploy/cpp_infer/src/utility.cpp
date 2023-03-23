@@ -19,6 +19,8 @@
 
 #include <vector>
 
+#include "constant.h"
+
 #ifdef _WIN32
 #include <direct.h>
 #else
@@ -420,6 +422,29 @@ float Utility::iou(std::vector<float> &box1, std::vector<float> &box2) {
     float intersect = (x2 - x1) * (y2 - y1);
     return intersect / (sum_area - intersect + 0.00000001);
   }
+}
+
+std::string Utility::OCRPredictResult2JsonStr(const std::vector<OCRPredictResult> &ocr_result) {
+	std::string resultStr = "";
+	Json::Value jsonResults;
+	for (int i = 0; i < ocr_result.size(); i++) {
+		Json::Value jsonResult;
+		Json::Value jsonBox;
+		for (int j = 0; j < ocr_result[i].box.size(); j++)
+		{
+			jsonBox[j][0] = Json::Value(ocr_result[i].box[j][0]);
+			jsonBox[j][1] = Json::Value(ocr_result[i].box[j][1]);
+		}
+		jsonResult[TAG_BOX] = jsonBox;
+		jsonResult[TAG_TEXT] = ocr_result[i].text;
+		jsonResult[TAG_SCORE] = ocr_result[i].score;
+		jsonResult[TAG_CLS_SCORE] = ocr_result[i].cls_score;
+		jsonResult[TAG_CLS_LABEL] = ocr_result[i].cls_label;
+		jsonResults.append(jsonResult);
+	}
+	resultStr = jsonResults.toStyledString();
+	std::cout << "jsonResults: " << resultStr << std::endl;
+	return resultStr;
 }
 
 } // namespace PaddleOCR

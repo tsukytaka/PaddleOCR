@@ -168,19 +168,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\paddlestructure.cpp" />
-    <ClCompile Include="..\src\structure_layout.cpp" />
-    <ClCompile Include="..\src\structure_table.cpp" />
-    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\args.cpp" />
-    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\clipper.cpp" />
+    <ClCompile Include="..\src\args.cpp" />
     <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\main.cpp" />
-    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\ocr_cls.cpp" />
-    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\ocr_det.cpp" />
-    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\ocr_rec.cpp" />
-    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\paddleocr.cpp" />
-    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\postprocess_op.cpp" />
-    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\preprocess_op.cpp" />
-    <ClCompile Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\src\utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\tusky\Documents\Projects\PaddleOCR\PaddleOCR_2.5\deploy\cpp_infer\build\ZERO_CHECK.vcxproj">
@@ -188,6 +177,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="paddle-engine.vcxproj">
+      <Project>{6f915d21-39e5-4dd7-bd55-f91ba9ac68c1}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

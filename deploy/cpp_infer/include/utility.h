@@ -30,6 +30,8 @@
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/imgproc.hpp"
 
+#include <json/json.h>
+
 namespace PaddleOCR {
 
 struct OCRPredictResult {
@@ -96,6 +98,7 @@ public:
   activation_function_softmax(std::vector<float> &src);
   static float iou(std::vector<int> &box1, std::vector<int> &box2);
   static float iou(std::vector<float> &box1, std::vector<float> &box2);
+  static std::string OCRPredictResult2JsonStr(const std::vector<OCRPredictResult> &ocr_result);
 
 private:
   static bool comparison_box(const OCRPredictResult &result1,

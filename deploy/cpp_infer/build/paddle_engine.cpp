@@ -14,6 +14,7 @@ int PaddleEngine::initRecognizer(std::string det_model_path, std::string rec_mod
 	FLAGS_det_model_dir = det_model_path;
 	FLAGS_rec_model_dir = rec_model_path;
 	FLAGS_cls_model_dir = cls_model_path;
+
 	recognizer = new PPOCR();
 	structureDetector = new PaddleStructure();
 	return ret;
@@ -22,13 +23,26 @@ int PaddleEngine::initRecognizer(std::string det_model_path, std::string rec_mod
 int PaddleEngine::configRecognizer(std::string opt)
 {
 	int ret = ERROR_SUCCESS;
-	int argc = 2;
 	std::cout << "opt : " << opt << std::endl;
-	char* argvalue = new char[opt.length() + 1];
-	strcpy(argvalue, opt.c_str());
-	char ** argv = new char*[2]{"", argvalue };
+	std::vector<std::string> args;
+	std::istringstream iss(opt);
+	std::string token;
+	while (iss >> token) {
+		args.push_back(token);
+	}
+	int argc = args.size() + 1;
+	char ** argv = new char*[argc];
+	argv[0] = new char[1]{ '\0' };
+	for (int i = 0; i < args.size(); i++)
+	{
+		argv[i+1] = new char[args[i].length() + 1];
+		strcpy(argv[i+1], args[i].c_str());
+		argv[i+1][args[i].length()] = '\0';
+	}
 	google::ParseCommandLineFlags(&argc, &argv, true);
 	std::cout << "FLAGS_rec_char_dict_path : " << FLAGS_rec_char_dict_path << std::endl;
+	std::cout << "layout_model_dir : " << FLAGS_layout_model_dir << std::endl;
+	std::cout << "table_model_dir : " << FLAGS_table_model_dir << std::endl;
 	return ret;
 }
 

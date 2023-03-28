@@ -40,7 +40,6 @@ public:
     this->precision_ = precision;
     this->table_batch_num_ = table_batch_num;
     this->table_max_len_ = table_max_len;
-
     this->post_processor_.init(label_path, merge_no_span_structure);
     LoadModel(model_dir);
   }

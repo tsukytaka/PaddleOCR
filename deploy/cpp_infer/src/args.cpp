@@ -72,5 +72,5 @@ DEFINE_string(table_char_dict_path,
 DEFINE_bool(det, true, "Whether use det in forward.");
 DEFINE_bool(rec, true, "Whether use rec in forward.");
 DEFINE_bool(cls, false, "Whether use cls in forward.");
-DEFINE_bool(table, false, "Whether use table structure in forward.");
-DEFINE_bool(layout, false, "Whether use layout analysis in forward.");
+DEFINE_bool(table, true, "Whether use table structure in forward.");
+DEFINE_bool(layout, true, "Whether use layout analysis in forward.");

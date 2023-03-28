@@ -28,7 +28,6 @@ void StructureTableRecognizer::Run(
       std::chrono::steady_clock::now() - std::chrono::steady_clock::now();
   std::chrono::duration<float> postprocess_diff =
       std::chrono::steady_clock::now() - std::chrono::steady_clock::now();
-
   int img_num = img_list.size();
   for (int beg_img_no = 0; beg_img_no < img_num;
        beg_img_no += this->table_batch_num_) {

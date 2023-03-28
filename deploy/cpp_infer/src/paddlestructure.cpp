@@ -17,6 +17,8 @@
 
 #include "auto_log/autolog.h"
 
+#include <opencv2/highgui.hpp>
+
 namespace PaddleOCR {
 
 PaddleStructure::PaddleStructure() {
@@ -42,7 +44,6 @@ PaddleStructure::structure(cv::Mat srcimg, bool layout, bool table, bool ocr) {
   srcimg.copyTo(img);
 
   std::vector<StructurePredictResult> structure_results;
-
   if (layout) {
     this->layout(img, structure_results);
   } else {
@@ -53,6 +54,18 @@ PaddleStructure::structure(cv::Mat srcimg, bool layout, bool table, bool ocr) {
     res.box[3] = img.rows;
     structure_results.push_back(res);
   }
+
+  ////cv::Mat drawImg = cv::Mat(img, rect).clone();
+  //cv::Mat drawImg = img.clone();
+  //for (int i = 0; i < structure_results.size(); i++)
+  //{
+	 // cv::Rect rect(structure_results[0].box[i], structure_results[i].box[1], structure_results[i].box[2], structure_results[i].box[3]);
+	 // cv::rectangle(drawImg, rect, cv::Scalar(255, 0, 0), 5, 8);
+  //}
+  //cv::resize(drawImg,drawImg, cv::Size(), 0.3, 0.3);
+  //cv::imshow("drawImg", drawImg);
+  //cv::waitKey();
+
   cv::Mat roi_img;
   for (int i = 0; i < structure_results.size(); i++) {
     // crop image
@@ -86,10 +99,25 @@ void PaddleStructure::table(cv::Mat img,
   std::vector<double> structure_times;
   std::vector<cv::Mat> img_list;
   img_list.push_back(img);
-
   this->table_model_->Run(img_list, structure_html_tags, structure_scores,
                           structure_boxes, structure_times);
-
+  //cv::Mat drawImg = img.clone();
+  //std::cout << "structure_boxes[0].size = " << structure_boxes[0].size() << std::endl;
+  //for (int i = 0; i < structure_boxes[0].size(); i++) {
+	 // //std::cout << structure_boxes[0][i][0] << ","
+		// // << structure_boxes[0][i][1] << ","
+		// // << structure_boxes[0][i][2] << ","
+		// // << structure_boxes[0][i][3] << std::endl;
+	 // //if (structure_boxes[i].size() == 8)
+	 // std::vector<int> structure_box = Utility::xyxyxyxy2xyxy(structure_boxes[0][i]);
+	 // cv::Rect box_rect(structure_box[0], structure_box[1], structure_box[2] - structure_box[0], structure_box[3] - structure_box[1]);
+	 // //cv::Rect box_rect(structure_boxes[0][i][0], structure_boxes[0][i][1], 10, 10);
+	 // cv::rectangle(drawImg, box_rect, cv::Scalar(0, 255, 0), 3);
+	 // //cv::line(drawImg, cv::Point(structure_boxes[0][i][0], structure_boxes[0][i][1]), cv::Point(structure_boxes[0][i][2], structure_boxes[0][i][3]), cv::Scalar(0, 255, 0), 3);
+  //}
+  //cv::resize(drawImg, drawImg, cv::Size(), 0.3, 0.3);
+  //cv::imshow("drawImg", drawImg);
+  //cv::waitKey();
   this->time_info_table[0] += structure_times[0];
   this->time_info_table[1] += structure_times[1];
   this->time_info_table[2] += structure_times[2];

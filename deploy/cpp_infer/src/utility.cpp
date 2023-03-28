@@ -443,8 +443,20 @@ std::string Utility::OCRPredictResult2JsonStr(const std::vector<OCRPredictResult
 		jsonResults.append(jsonResult);
 	}
 	resultStr = jsonResults.toStyledString();
-	std::cout << "jsonResults: " << resultStr << std::endl;
 	return resultStr;
+}
+
+std::vector<std::string> string2Args(std::string argStr)
+{
+	std::vector<std::string> args;
+	std::istringstream iss(argStr);
+
+	std::string token;
+	while (iss >> token) {
+		args.push_back(token);
+	}
+	args.push_back(0);
+
 }
 
 } // namespace PaddleOCR

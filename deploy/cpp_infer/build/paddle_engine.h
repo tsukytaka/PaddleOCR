@@ -20,5 +20,5 @@ public:
 	int detect(cv::Mat img, std::string &jsonResult);
 	int readText(cv::Mat img, std::string &text, double &score, bool det, bool rec, bool cls);
 	int predict(cv::Mat img, std::string &jsonResult);
-	int structure(cv::Mat img);
+	int structure(cv::Mat img, bool layout, bool table, std::string &jsonResult);
 };

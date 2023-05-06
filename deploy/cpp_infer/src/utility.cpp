@@ -446,6 +446,38 @@ std::string Utility::OCRPredictResult2JsonStr(const std::vector<OCRPredictResult
 	return resultStr;
 }
 
+std::string Utility::StructurePredictResult2JsonStr(const std::vector<StructurePredictResult> &structure_result) {
+	std::string resultStr = "";
+	Json::Value jsonResults;
+	for (int i = 0; i < structure_result.size(); i++) {
+		Json::Value jsonResult;
+		Json::Value jsonBox;
+		for (int j = 0; j < structure_result[i].box.size(); j++)
+		{
+			jsonBox[j] = Json::Value(structure_result[i].box[j]);
+		}
+		jsonResult[TAG_BOX] = jsonBox;
+		Json::Value jsonCellBoxs;
+		for (int j = 0; j < structure_result[i].cell_box.size(); j++)
+		{
+			std::vector<int> cell_box = structure_result[i].cell_box[j];
+			std::vector<int> structure_cell_box = xyxyxyxy2xyxy(cell_box);
+			Json::Value jsonCellBox;
+			for (int k = 0; k < structure_cell_box.size(); k++)
+			{
+				jsonCellBox[k] = structure_cell_box[k];
+			}
+			jsonCellBoxs.append(jsonCellBox);
+		}
+		if (structure_result[i].cell_box.size() > 0) {
+			jsonResult[TAG_CELL_BOX] = jsonCellBoxs;
+		}
+		jsonResults.append(jsonResult);
+	}
+	resultStr = jsonResults.toStyledString();
+	return resultStr;
+}
+
 std::vector<std::string> string2Args(std::string argStr)
 {
 	std::vector<std::string> args;

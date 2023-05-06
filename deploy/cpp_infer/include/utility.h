@@ -99,6 +99,7 @@ public:
   static float iou(std::vector<int> &box1, std::vector<int> &box2);
   static float iou(std::vector<float> &box1, std::vector<float> &box2);
   static std::string OCRPredictResult2JsonStr(const std::vector<OCRPredictResult> &ocr_result);
+  static std::string StructurePredictResult2JsonStr(const std::vector<StructurePredictResult> &structure_result);
 
 private:
   static bool comparison_box(const OCRPredictResult &result1,

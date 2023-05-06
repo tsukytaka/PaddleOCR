@@ -79,53 +79,30 @@ int PaddleEngine::predict(cv::Mat img, std::string &jsonResult)
 	return ret;
 }
 
-int PaddleEngine::structure(cv::Mat img) {
+int PaddleEngine::structure(cv::Mat img, bool layout, bool table, std::string &jsonResult) {
 	int ret = ERROR_SUCCESS;
 	PaddleStructure* ppStructure = static_cast<PaddleStructure*>(structureDetector);
-
-    std::vector<StructurePredictResult> structure_results = ppStructure->structure(img, true, true, false);
-
-	//cv::Mat drawImg = cv::Mat(img, rect).clone();
+    std::vector<StructurePredictResult> structure_results = ppStructure->structure(img, layout, table, false);
 	//cv::Mat drawImg = img.clone();
-
  //   for (int j = 0; j < structure_results.size(); j++) {
 	//	cv::Rect rect(structure_results[j].box[0], structure_results[j].box[1], structure_results[j].box[2] - structure_results[j].box[0], structure_results[j].box[3] - structure_results[j].box[1]);
 	//	cv::rectangle(drawImg, rect, cv::Scalar(255, 0, 0), 5, 8);
+	//	
 	//	for (int i = 0; i < structure_results[j].cell_box.size(); i++) {
-	//		std::cout << structure_results[j].cell_box[i][0] << ","
-	//			<< structure_results[j].cell_box[i][1] << ","
-	//			<< structure_results[j].cell_box[i][2] << ","
-	//			<< structure_results[j].cell_box[i][3] << std::endl;
-	//		cv::Rect box_rect(structure_results[j].cell_box[i][0], structure_results[j].cell_box[i][1], structure_results[j].cell_box[i][2] - structure_results[j].cell_box[i][0], structure_results[j].cell_box[i][3] - structure_results[j].cell_box[i][1]);
-	//		cv::rectangle(drawImg, box_rect, cv::Scalar(0, 255, 0), 3);
+	//		std::cout << "structure_results[j].cell_box = " << structure_results[j].cell_box[i].size() << std::endl;
+	//		std::vector<int> structure_cell_box = Utility::xyxyxyxy2xyxy(structure_results[j].cell_box[i]);
+	//		std::cout << structure_cell_box[0] << ","
+	//			<< structure_cell_box[1] << ","
+	//			<< structure_cell_box[2] << ","
+	//			<< structure_cell_box[3] << std::endl;
+	//		cv::Rect box_rect(structure_cell_box[0] + structure_results[j].box[0], structure_cell_box[1] + structure_results[j].box[1], structure_cell_box[2] - structure_cell_box[0], structure_cell_box[3] - structure_cell_box[1]);
+	//		cv::rectangle(drawImg, box_rect, cv::Scalar(0, 255, 0), 1);
 	//	}
- //     //std::cout << j << "\ttype: " << structure_results[j].type
- //     //          << ", region: [";
- //     //std::cout << structure_results[j].box[0] << ","
- //     //          << structure_results[j].box[1] << ","
- //     //          << structure_results[j].box[2] << ","
- //     //          << structure_results[j].box[3] << "], score: ";
- //     //std::cout << structure_results[j].confidence << ", res: " << std::endl;
-
-	//	//if (structure_results[j].type == "table") {
-	//	//	std::cout << structure_results[j].html;
-	//	//	std::string pathFile = "output/tmp_" + std::to_string(j) + ".jpg";
-	//	//	Utility::VisualizeBboxes(img, structure_results[j], pathFile);
-	//	//} else {
-	//	//	std::cout << "count of ocr result is : "
-	//	//				<< structure_results[j].text_res.size() << std::endl;
-	//	//	if (structure_results[j].text_res.size() > 0) {
-	//	//		std::cout << "********** print ocr result "
-	//	//				<< "**********" << std::endl;
-	//	//		Utility::print_result(structure_results[j].text_res);
-	//	//		std::cout << "********** end print ocr result "
-	//	//				<< "**********" << std::endl;
-	//	//	}
-	//	//}
- //   
 	//}
 	//cv::resize(drawImg, drawImg, cv::Size(), 0.3, 0.3);
 	//cv::imshow("drawImg", drawImg);
 	//cv::waitKey();
+
+	jsonResult = Utility::StructurePredictResult2JsonStr(structure_results);
 	return ret;
 }

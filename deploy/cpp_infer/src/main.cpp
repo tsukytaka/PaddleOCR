@@ -230,8 +230,8 @@ int main(int argc, char **argv) {
 	//ret = pe.readText(img, text, score, true, true, false);
 	//std::cout << "text: " << text << " - " << score << std::endl;
 	std::string jsonStr;
-	ret = pe_japan.predict(img, jsonStr);
-	//pe_japan.structure(img);
+	//ret = pe_japan.predict(img, jsonStr);
+	pe_japan.structure(img, true, false, jsonStr);
 	std::cout << "jsonStr: " << jsonStr << std::endl;
 	
 	return ret;

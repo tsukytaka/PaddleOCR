@@ -226,8 +226,11 @@ int PPOCR::ocr(cv::Mat img, std::string &text, double &score, bool det, bool rec
 	}
 	if (ocr_results[0].size() > 0) {
 		score = 0;
-		for (int i = ocr_results[0].size() - 1; i >= 0; i--) {
-			text += ocr_results[0][i].text + " \n";
+		for (int i = 0; i < ocr_results[0].size(); i++) {
+			text += ocr_results[0][i].text;
+			if (i < ocr_results[0].size() - 1) {
+				text += "\n";
+			}
 			score += ocr_results[0][i].score;
 		}
 		score /= ocr_results[0].size();

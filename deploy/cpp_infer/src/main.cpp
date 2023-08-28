@@ -218,20 +218,20 @@ int main(int argc, char **argv) {
 	//pe.configRecognizer("--rec_char_dict_path=paddle_rec_model/en/en_dict.txt");
 	//pe.initRecognizer("paddle_det_model/en", "paddle_rec_model/en", "", "paddle_layout_model/");
 	PaddleEngine pe_japan;
-	pe_japan.configRecognizer("--rec_char_dict_path=paddle_rec_model/japan/japan_dict.txt \
+	pe_japan.configRecognizer("--rec_char_dict_path=paddle_rec_model/japan_PP-OCRv4_rec_infer/japan_dict.txt \
 --layout_model_dir=paddle_layout_model/picodet_lcnet_x1_0_fgd_layout_table_infer --layout_dict_path=paddle_layout_model/picodet_lcnet_x1_0_fgd_layout_table_infer/layout_table_dict.txt \
 --table_model_dir=paddle_table_model/ch_ppstructure_mobile_v2.0_SLANet_infer --table_char_dict_path=paddle_table_model/ch_ppstructure_mobile_v2.0_SLANet_infer/table_structure_dict_ch.txt");
 //	pe_japan.configRecognizer("--rec_char_dict_path=paddle_rec_model/japan/japan_dict.txt \
 //--table_model_dir=paddle_table_model/ch_ppstructure_mobile_v2.0_SLANet_infer");
 
-	pe_japan.initRecognizer("paddle_det_model/ml", "paddle_rec_model/japan", "");
+	pe_japan.initRecognizer("paddle_det_model/ml", "paddle_rec_model/japan_PP-OCRv4_rec_infer", "");
 	//std::string text;
 	//double score;
 	//ret = pe.readText(img, text, score, true, true, false);
 	//std::cout << "text: " << text << " - " << score << std::endl;
 	std::string jsonStr;
-	//ret = pe_japan.predict(img, jsonStr);
-	pe_japan.structure(img, true, false, jsonStr);
+	ret = pe_japan.predict(img, jsonStr);
+	//pe_japan.structure(img, true, false, jsonStr);
 	std::cout << "jsonStr: " << jsonStr << std::endl;
 	
 	return ret;

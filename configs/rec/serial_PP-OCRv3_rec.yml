@@ -8,7 +8,7 @@ Global:
   print_batch_step: 10
   save_model_dir: ./output/serial_OCRv3
   save_epoch_step: 1
-  eval_batch_step: [0, 100]
+  eval_batch_step: [0, 2000]
   cal_metric_during_train: true
   pretrained_model:
   checkpoints:

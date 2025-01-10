@@ -35,3 +35,7 @@ pyyaml
 #export model -> env cpu (ocr)
 #python tools/export_model.py -c configs/rec/number_PP-OCRv3_rec.yml -o Global.pretrained_model=output/number_OCRv3/best_accuracy  Global.save_inference_dir=output/number_OCRv3/etlcdb_font_hwjp_number_PP-OCRv3_inference/
 #python tools/export_model.py -c configs/rec/PP-OCRv3/multi_language/injury_japan_PP-OCRv3_rec.yml -o Global.pretrained_model=./output/v3_japan_mobile/best_accuracy  Global.save_inference_dir=output/number_OCRv3/etlcdb_font_hwjp_number_PP-OCRv3_inference/
+
+
+#convert to paddlelite
+#paddle_lite_opt --model_dir="./output/en_PP-OCRv4_rec_infer" --optimize_out=./output/en_PP-OCRv4_rec_infer/lite/en_PP-OCRv4_rec_infer_lite --valid_targets=arm  --optimize_out_type=naive_buffer

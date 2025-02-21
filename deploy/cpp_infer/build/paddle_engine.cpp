@@ -26,7 +26,7 @@ int PaddleEngine::initRecognizer(std::string det_model_path, std::string rec_mod
 int PaddleEngine::configRecognizer(std::string opt)
 {
 	int ret = ERROR_SUCCESS;
-	std::cout << "opt : " << opt << std::endl;
+	//std::cout << "opt : " << opt << std::endl;
 	std::vector<std::string> args;
 	std::istringstream iss(opt);
 	std::string token;
@@ -43,9 +43,9 @@ int PaddleEngine::configRecognizer(std::string opt)
 		argv[i+1][args[i].length()] = '\0';
 	}
 	google::ParseCommandLineFlags(&argc, &argv, true);
-	std::cout << "FLAGS_rec_char_dict_path : " << FLAGS_rec_char_dict_path << std::endl;
-	std::cout << "layout_model_dir : " << FLAGS_layout_model_dir << std::endl;
-	std::cout << "table_model_dir : " << FLAGS_table_model_dir << std::endl;
+	//std::cout << "FLAGS_rec_char_dict_path : " << FLAGS_rec_char_dict_path << std::endl;
+	//std::cout << "layout_model_dir : " << FLAGS_layout_model_dir << std::endl;
+	//std::cout << "table_model_dir : " << FLAGS_table_model_dir << std::endl;
 	return ret;
 }
 
